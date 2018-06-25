@@ -1,0 +1,4 @@
+{
+  "flow.pathToFlow": "${workspaceRoot}/frontend/node_modules/.bin/flow",
+  "python.pythonPath": "${workspaceFolder}/env/bin/python"
+}
