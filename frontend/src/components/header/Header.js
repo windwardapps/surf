@@ -11,7 +11,7 @@ class Header extends React.Component {
       <div name="Header">
         <div className="left">
           <div>Surf</div>
-          {links.map((link, i) => (
+          {links.filter(link => !!link.label).map((link, i) => (
             <Link key={i} to={link.url}>
               {link.label}
             </Link>

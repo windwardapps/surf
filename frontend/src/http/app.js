@@ -7,6 +7,10 @@ export function fetchAppData() {
     user: { id: 1, email: 'kyle@windwardapps.com', type: 'admin' },
     links: [
       {
+        url: '/admin',
+        component: 'Admin'
+      },
+      {
         url: '/admin/admin-feature-1',
         label: 'Admin Feature 1',
         component: 'Admin'
