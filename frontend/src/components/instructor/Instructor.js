@@ -1,10 +1,10 @@
+// @flow
 import React from 'react';
 import Card from '../common/Card';
 
 import './Instructor.css';
 
 class Instructor extends React.Component {
-  
   render() {
     return (
       <div name="Instructor">
@@ -36,7 +36,6 @@ class Instructor extends React.Component {
       </div>
     );
   }
-
 }
 
 export default Instructor;

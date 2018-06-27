@@ -1,24 +1,26 @@
+// @flow
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 import './Header.css';
 
 class Header extends React.Component {
-  
   render() {
+    const { links } = this.props;
     return (
       <div name="Header">
         <div className="left">
           <div>Surf</div>
-          <Link to="/feature-1">Feature 1</Link>
+          {links.map((link, i) => (
+            <Link key={i} to={link.url}>
+              {link.label}
+            </Link>
+          ))}
         </div>
-        <div className="right">
-          right
-        </div>
+        <div className="right">right</div>
       </div>
     );
   }
-
 }
 
 export default Header;
