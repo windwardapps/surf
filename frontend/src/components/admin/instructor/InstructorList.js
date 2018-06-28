@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
 import { Route, Link, withRouter } from 'react-router-dom';
 
 import './InstructorList.css';

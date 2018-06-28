@@ -1,41 +1,66 @@
 // @flow
-import React from 'react';
-import Card from '../common/Card';
 
 import './Instructor.css';
 
-class Instructor extends React.Component {
+import React from 'react';
+import { Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Card from '../common/Card';
+import Certifications from '../certification/Certifications';
+import Videos from '../video/Videos';
+import { fetchInstructorData } from '../../http/instructor';
+import store from '../../store';
+
+const components = {
+  Certifications,
+  Videos
+};
+
+type Props = {
+  match: Object,
+  links: Object[]
+};
+
+class Instructor extends React.Component<Props, {}> {
+  async componentDidMount() {
+    const data = await fetchInstructorData();
+    store.dispatch({ type: 'INIT_INSTRUCTOR', data });
+  }
+
   render() {
+    const { match, links } = this.props;
     return (
       <div name="Instructor">
         <h1>Instructor</h1>
-        <div>
-          <h2>News</h2>
-          <Card title="Item 1">
-            <div>Item 1 content</div>
-          </Card>
-          <Card title="Item 2">
-            <div>Item 2 content</div>
-          </Card>
-          <Card title="Item 3">
-            <div>Item 3 content</div>
-          </Card>
+        <div className="links">
+          <Route
+            exact
+            path="/admin"
+            render={() =>
+              links.map((link, i) => (
+                <Link key={i} to={link.url}>
+                  <Card title={link.label}>
+                    <div>{link.label}</div>
+                  </Card>
+                </Link>
+              ))
+            }
+          />
         </div>
-        <div>
-          <h2>Action Items</h2>
-          <Card title="Item 1">
-            <div>Item 1 content</div>
-          </Card>
-          <Card title="Item 2">
-            <div>Item 2 content</div>
-          </Card>
-          <Card title="Item 3">
-            <div>Item 3 content</div>
-          </Card>
-        </div>
+        {links.map((link, i) => (
+          <Route
+            key={i}
+            path={link.url}
+            component={components[link.component]}
+          />
+        ))}
       </div>
     );
   }
 }
 
-export default Instructor;
+const mapStateToProps = (state, ownProps) => ({
+  links: state.app.links.filter(l => l.url !== ownProps.match.url)
+});
+
+export default connect(mapStateToProps)(Instructor);

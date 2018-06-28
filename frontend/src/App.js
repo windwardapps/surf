@@ -42,25 +42,27 @@ class App extends Component<Props, {}> {
       <Router>
         <div name="App">
           <Header links={links} />
-          <Switch>
-            {links.map((link, i) => (
-              <Route
-                key={i}
-                path={link.url}
-                component={components[link.component]}
-              />
-            ))}
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <Redirect
-                  to={user.type === 'admin' ? '/admin' : '/instructor'}
+          <div className="main">
+            <Switch>
+              {links.map((link, i) => (
+                <Route
+                  key={i}
+                  path={link.url}
+                  component={components[link.component]}
                 />
-              )}
-            />
-            <Route component={NoMatch} />
-          </Switch>
+              ))}
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <Redirect
+                    to={user.type === 'admin' ? '/admin' : '/instructor'}
+                  />
+                )}
+              />
+              <Route component={NoMatch} />
+            </Switch>
+          </div>
         </div>
       </Router>
     );
