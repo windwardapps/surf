@@ -35,7 +35,7 @@ class Instructor extends React.Component<Props, {}> {
         <div className="links">
           <Route
             exact
-            path="/admin"
+            path="/instructor"
             render={() =>
               links.map((link, i) => (
                 <Link key={i} to={link.url}>
